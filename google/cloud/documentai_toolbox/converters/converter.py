@@ -18,6 +18,7 @@
 from concurrent import futures
 import os
 import time
+import traceback
 from typing import Dict, List, Optional, Set, Tuple
 
 from google.api_core.client_options import ClientOptions
@@ -197,7 +198,9 @@ def _convert_to_docproto_with_config(
 
         except Exception as e:
             print(e)
-            print(f"Could Not Convert {name}\nretrying")
+            print(f"Nic Could Not Convert {name}\nretrying")
+            error_msg = f'Error processing {e}'
+            print(f'{error_msg}\n{traceback.format_exc()}')
             time.sleep(wait_time + i)
 
     return None

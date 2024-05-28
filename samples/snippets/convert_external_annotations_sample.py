@@ -15,6 +15,7 @@
 
 # [START documentai_toolbox_convert_external_annotations]
 
+import traceback
 from google.cloud.documentai_toolbox import converter
 
 # TODO(developer): Uncomment these variables before running the sample.
@@ -43,22 +44,23 @@ from google.cloud.documentai_toolbox import converter
 #   ├──test_annotations.json
 #   ├──test_config.json
 #   └──test.pdf
+#  guid1_annotations.json
+#  guid1.pdf
+#  ------
+#  gcs_input_dir/config.json
+#  gcs_input_dir/guid1_annotations.json
+#  gcs_input_dir/guid1.pdf
+# 
 #
 # An example of the config is in sample-converter-configs/Azure/form-config.json
 #
-# location = "us",
-# processor_id = "my_processor_id"
-# gcs_input_path = "gs://path/to/input/folder"
-# gcs_output_path = "gs://path/to/input/folder"
+location = "us",
+processor_id = "ff4c4a2da05451b0"
+gcs_input_path = "gs://reside-stage-docai/nic-docai-toolbox-py-tests/test1"
+gcs_output_path = "gs://reside-stage-docai/nic-docai-toolbox-py-tests-output/test1"
+project_id = "reside-stage"
 
-
-def convert_external_annotations_sample(
-    location: str,
-    processor_id: str,
-    project_id: str,
-    gcs_input_path: str,
-    gcs_output_path: str,
-) -> None:
+try:
     converter.convert_from_config(
         project_id=project_id,
         location=location,
@@ -66,6 +68,8 @@ def convert_external_annotations_sample(
         gcs_input_path=gcs_input_path,
         gcs_output_path=gcs_output_path,
     )
-
+except Exception as e:
+    error_msg = f'Error processing {e}'
+    print(f'{error_msg}\n{traceback.format_exc()}')
 
 # [END documentai_toolbox_convert_external_annotations]

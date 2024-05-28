@@ -1,9 +1,5 @@
 {
     "entity_object":"inputs",
-    "page": {
-        "height":"", //page width from Answers/Templater
-        "width":""
-    },
     "entity": {
         "type_":"type",
         "mention_text":"answer",
